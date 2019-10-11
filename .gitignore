@@ -1,0 +1,14 @@
+.vscode/
+
+# cmake . generated code
+CMakeCache.txt
+CMakeFiles/
+Makefile
+bin/
+cmake_install.cmake
+pmt
+pmt.cbp
+
+text.txt
+pattern.txt
+shakespeare.txt

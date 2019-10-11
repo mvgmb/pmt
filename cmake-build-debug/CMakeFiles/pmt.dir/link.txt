@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/pmt.dir/src/main.cpp.o CMakeFiles/pmt.dir/src/aho_corasick.cpp.o CMakeFiles/pmt.dir/src/general_algorithm.cpp.o  -o pmt 
