@@ -55,31 +55,32 @@ size_t wu_manber::count(string &text) {
 }
 
 bool wu_manber::exists(string &text) {
-    size_t no_occ = 0;
     auto patterns_it = patterns.begin();
     auto char_masks_it = char_masks.begin();
-
 
     while (patterns_it != patterns.end() && char_masks_it != char_masks.end()) {
         auto &pattern = *patterns_it++;
         auto &char_mask = *char_masks_it++;
 
-        vector<uint64_t> s(err + 1, -1); // 111..111
         uint64_t comparator = 1ul << (pattern.size() - 1);
 
-        for (auto &c : text) {
-            s[0] <<= 1;
-            s[0] |= char_mask[c];
+        vector<uint64_t> sprev;
+        sprev.emplace_back(-1); // 111..111
 
-            uint64_t prev = s[0];
-            for (size_t i = 1; i <= err; ++i) {
-                uint64_t si = s[i];
-                s[i] = ((s[i] << 1) | char_mask[c]) & (s[i - 1] << 1) & (prev << 1) & prev;
-                prev = si;
-            }
+        for (size_t e = 0; e < err; ++e)
+            sprev.emplace_back(sprev[e] << 1);
+
+        for (auto &c : text) {
+            vector<uint64_t> s;
+            s.emplace_back((sprev[0] << 1) | char_mask[static_cast<unsigned char>(c)]);
+
+            for (size_t i = 1; i <= err; ++i)
+                s.emplace_back(((sprev[i] << 1) | char_mask[c]) & (sprev[i-1] << 1) & (s[i-1] << 1) & sprev[i-1]);
 
             if (!(s[err] & comparator))
                 return true;
+
+            sprev = s;
         }
     }
     return false;
