@@ -7,16 +7,22 @@
 using namespace std;
 
 aho_corasick::aho_corasick(list<string> &patterns) {
+    occ.emplace_back();
+
     // build _goto
     size_t i = 0;
     for (auto &p : patterns) {
         size_t cur = 0;
         for (auto &c : p) {
-            pair<char, size_t> key = {cur, c};
-            if (_goto.find(key) != _goto.end())
-                cur = _goto[key];
-            else
-                _goto[key] = cur = _goto.size();
+            if (_goto.size() > cur && _goto[cur][static_cast<unsigned char>(c)] != -1)
+                cur = _goto[cur][static_cast<unsigned char>(c)];
+            else {
+                occ.emplace_back();
+
+                _goto.emplace_back(256, -1);
+                _goto[cur][static_cast<unsigned char>(c)] = _goto.size();
+                cur = _goto.size();
+            }
         }
 
         occ[cur].emplace_back(i++);
@@ -28,25 +34,27 @@ aho_corasick::aho_corasick(list<string> &patterns) {
 
     queue<size_t> q;
     // initialize _goto for every char
-    for (size_t c = 0; c <= 256; c++) {
-        if (_goto[{0, c}] != 0)
-            q.push(_goto[{0, c}]);
+    for (size_t c = 0; c < 256; c++) {
+        if (!_goto.empty() && _goto[0][static_cast<unsigned char>(c)] != -1 && _goto[0][static_cast<unsigned char>(c)] != 0)
+            q.push(_goto[0][static_cast<unsigned char>(c)]);
+        else
+            _goto[0][static_cast<unsigned char>(c)] = 0;
     }
 
     while (!q.empty()) {
         size_t state = q.front();
         q.pop();
 
-        for (size_t c = 0; c <= 256; c++)
-            if (_goto.find({state, c}) != _goto.end()) {
-                size_t next = _goto[{state, c}];
+        for (size_t c = 0; c < 256; c++)
+            if (_goto.size() > state && _goto[state][static_cast<unsigned char>(c)] != -1) {// _goto.find({state, c}) != _goto.end()) {
+                size_t next = _goto[state][static_cast<unsigned char>(c)];
                 q.push(next);
 
                 size_t cur = fail[state];
-                while (_goto.find({cur, c}) == _goto.end())
+                while (_goto.size() <= cur || _goto[cur][static_cast<unsigned char>(c)] == -1) //(_goto.find({cur, c}) == _goto.end())
                     cur = fail[cur];
 
-                fail[next] = _goto[{cur, c}];
+                fail[next] = _goto[cur][static_cast<unsigned char>(c)];
                 occ[next].insert(occ[next].end(), occ[fail[next]].begin(), occ[fail[next]].end());
             }
     }
@@ -58,9 +66,9 @@ size_t aho_corasick::count(string &text) {
     size_t cur = 0;
     size_t i = 0;
     for (auto &c : text) {
-        while (_goto.find({cur, c}) == _goto.end())
+        while (_goto.size() <= cur || _goto[cur][static_cast<unsigned char>(c)] == -1) //(_goto.find({cur, c}) == _goto.end())
             cur = fail[cur];
-        cur = _goto[{cur, c}];
+        cur = _goto[cur][static_cast<unsigned char>(c)];//  [{cur, c}];
         no_occ += occ[cur].size();
         ++i;
     }
@@ -72,34 +80,13 @@ bool aho_corasick::exists(string &text) {
     size_t cur = 0;
     size_t i = 0;
     for (auto &c : text) {
-        while (_goto.find({cur, c}) == _goto.end())
+        while (_goto.size() <= cur || _goto[cur][static_cast<unsigned char>(c)] == -1) //(_goto.find({cur, c}) == _goto.end())
             cur = fail[cur];
-        cur = _goto[{cur, c}];
+        cur = _goto[cur][static_cast<unsigned char>(c)];//  [{cur, c}];
 
         if (!occ[cur].empty())
             return true;
         ++i;
     }
     return false;
-}
-
-void aho_corasick::print_goto(unordered_map<pair<size_t, char>, size_t> &_goto) {
-    for (unordered_map<pair<size_t, char>, size_t>::const_iterator it = _goto.begin(); it != _goto.end(); ++it)
-        if (it->first.first != 0 || it->second != 0)
-            cout << "{" << it->first.first << ", " << it->first.second << "} -> " << it->second << "\n";
-}
-
-void aho_corasick::print_fail(vector<size_t> &fail) {
-    for (auto &f : fail)
-        cout << f << " ";
-    cout << endl;
-}
-
-void aho_corasick::print_occ(unordered_map<size_t, vector<size_t>> &occ) {
-    for (auto &oc : occ) {
-        cout << "{" << oc.first << "} -> ";
-        for (auto &o : oc.second)
-            cout << " " << o;
-        cout << endl;
-    }
 }
