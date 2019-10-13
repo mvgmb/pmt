@@ -13,10 +13,10 @@
   <component name="ChangeListManager">
     <list default="true" id="9fb32aa4-16c3-4662-ab5b-053418a7eda8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/aho_corasick.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/aho_corasick.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/aho_corasick.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/aho_corasick.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shift_and.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/shift_and.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shift_or.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/shift_or.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/wu_manber.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/wu_manber.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -82,7 +82,7 @@
       <workItem from="1570765737519" duration="34732000" />
       <workItem from="1570976077597" duration="27000" />
       <workItem from="1570976197371" duration="1355000" />
-      <workItem from="1570980514144" duration="13147000" />
+      <workItem from="1570980514144" duration="17079000" />
     </task>
     <servers />
   </component>

@@ -16,7 +16,6 @@ shift_or::shift_or(list<string> &patterns) : patterns(patterns) {
             stamp <<= 1;
             stamp |= one;
         }
-
         char_masks.emplace_back(char_mask);
     }
 }
@@ -31,7 +30,7 @@ size_t shift_or::count(string &text) {
         auto &char_mask = *char_masks_it++;
 
         uint64_t cur = -1; // 111..111
-        uint64_t comparator = 1 << (pattern.size() - 1);
+        uint64_t comparator = 1ul << (pattern.size() - 1);
 
         for (auto &c : text) {
             cur <<= 1;
@@ -40,6 +39,7 @@ size_t shift_or::count(string &text) {
                 ++no_occ;
         }
     }
+
     return no_occ;
 }
 
@@ -52,7 +52,7 @@ bool shift_or::exists(string &text) {
         auto &char_mask = *char_masks_it++;
 
         uint64_t cur = -1; // 111..111
-        uint64_t comparator = 1 << (pattern.size() - 1);
+        uint64_t comparator = 1ul << (pattern.size() - 1);
 
         for (auto &c : text) {
             cur <<= 1;

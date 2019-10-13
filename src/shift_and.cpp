@@ -29,7 +29,7 @@ size_t shift_and::count(string &text) {
         auto &char_mask = *char_masks_it++;
 
         uint64_t cur = 0; // 000..000
-        uint64_t comparator = 1 << (pattern.size() - 1);
+        uint64_t comparator = 1ul << (pattern.size() - 1);
         uint64_t one = 1;
 
         for (auto &c : text) {
@@ -55,7 +55,7 @@ bool shift_and::exists(string &text) {
         auto &char_mask = *char_masks_it++;
 
         uint64_t cur = 0; // 000..000
-        uint64_t comparator = 1 << (pattern.size() - 1);
+        uint64_t comparator = 1ul << (pattern.size() - 1);
         uint64_t one = 1;
 
         for (auto &c : text) {

@@ -30,7 +30,7 @@ size_t wu_manber::count(string &text) {
         auto &pattern = *patterns_it++;
         auto &char_mask = *char_masks_it++;
 
-        uint64_t comparator = 1 << (pattern.size() - 1);
+        uint64_t comparator = 1ul << (pattern.size() - 1);
 
         vector<uint64_t> sprev;
         sprev.emplace_back(-1); // 111..111
@@ -65,7 +65,7 @@ bool wu_manber::exists(string &text) {
         auto &char_mask = *char_masks_it++;
 
         vector<uint64_t> s(err + 1, -1); // 111..111
-        uint64_t comparator = 1 << (pattern.size() - 1);
+        uint64_t comparator = 1ul << (pattern.size() - 1);
 
         for (auto &c : text) {
             s[0] <<= 1;
