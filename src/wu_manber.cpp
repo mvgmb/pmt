@@ -64,18 +64,20 @@ bool wu_manber::exists(string &text) {
 
         uint64_t comparator = 1ul << (pattern.size() - 1);
 
-        vector<uint64_t> sprev;
-        sprev.emplace_back(-1); // 111..111
+        vector<uint64_t> sprev(err + 1);
+        size_t index = 0;
+        sprev[++index] = -1; // 111..111
 
         for (size_t e = 0; e < err; ++e)
-            sprev.emplace_back(sprev[e] << 1);
+            sprev[++index] = sprev[e] << 1;
 
         for (auto &c : text) {
-            vector<uint64_t> s;
-            s.emplace_back((sprev[0] << 1) | char_mask[static_cast<unsigned char>(c)]);
+            vector<uint64_t> s(err + 1);
+            index = 0;
+            s[++index] = ((sprev[0] << 1) | char_mask[static_cast<unsigned char>(c)]);
 
             for (size_t i = 1; i <= err; ++i)
-                s.emplace_back(((sprev[i] << 1) | char_mask[c]) & (sprev[i-1] << 1) & (s[i-1] << 1) & sprev[i-1]);
+                s[++index] = (((sprev[i] << 1) | char_mask[c]) & (sprev[i-1] << 1) & (s[i-1] << 1) & sprev[i-1]);
 
             if (!(s[err] & comparator))
                 return true;
