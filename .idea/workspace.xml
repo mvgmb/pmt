@@ -37,11 +37,11 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -81,7 +81,7 @@
       <workItem from="1571006719383" duration="1253000" />
       <workItem from="1571008081544" duration="4972000" />
       <workItem from="1571013854427" duration="2643000" />
-      <workItem from="1571017622955" duration="1437000" />
+      <workItem from="1571017622955" duration="2151000" />
     </task>
     <servers />
   </component>
