@@ -12,13 +12,15 @@
 #include "shift_or.h"
 #include "shift_and.h"
 #include "wu_manber.h"
+#include "sellers.h"
 
 using namespace std;
 
 enum algorithm {
     AHO_CORASICK = 'a',
-    SHIFT_OR = 's',
+    OR_SHIFT = 'o',
     WU_MANBER = 'w',
+    SELLERS = 's',
 };
 
 enum options {
@@ -133,7 +135,13 @@ int main(int argc, char *argv[]) {
             exists = [&](string &s) -> bool { return algorithm->exists(s); };
             break;
         }
-        case algorithm::SHIFT_OR: {
+        case algorithm::SELLERS: {
+            auto algorithm = new sellers(patterns, e);
+            count = [&](string &s) -> size_t { return algorithm->count(s); };
+            exists = [&](string &s) -> bool { return algorithm->exists(s); };
+            break;
+        }
+        case algorithm::OR_SHIFT: {
             auto algorithm = new shift_or(patterns);
             count = [&](string &s) -> size_t { return algorithm->count(s); };
             exists = [&](string &s) -> bool { return algorithm->exists(s); };

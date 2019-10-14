@@ -23,6 +23,7 @@ wu_manber::wu_manber(list<string> &patterns, size_t err) : err(err), patterns(pa
 
 size_t wu_manber::count(string &text) {
     size_t no_occ = 0;
+
     auto patterns_it = patterns.begin();
     auto char_masks_it = char_masks.begin();
 
@@ -32,23 +33,26 @@ size_t wu_manber::count(string &text) {
 
         uint64_t comparator = 1ul << (pattern.size() - 1);
 
-        vector<uint64_t> sprev;
-        sprev.emplace_back(-1); // 111..111
+        bool b = true;
+        vector<vector<uint64_t>> s(2, vector<uint64_t>(err + 1));
+
+        size_t index = 0;
+        s[b][index++] = -1; // 111..111
 
         for (size_t e = 0; e < err; ++e)
-            sprev.emplace_back(sprev[e] << 1);
+            s[b][index++] = s[b][e] << 1;
 
         for (auto &c : text) {
-            vector<uint64_t> s;
-            s.emplace_back((sprev[0] << 1) | char_mask[static_cast<unsigned char>(c)]);
+            index = 0;
+            s[!b][index++] = ((s[b][0] << 1) | char_mask[static_cast<unsigned char>(c)]);
 
             for (size_t i = 1; i <= err; ++i)
-                s.emplace_back(((sprev[i] << 1) | char_mask[c]) & (sprev[i-1] << 1) & (s[i-1] << 1) & sprev[i-1]);
+                s[!b][index++] = (((s[b][i] << 1) | char_mask[c]) & (s[b][i - 1] << 1) & (s[!b][i - 1] << 1) & s[b][i - 1]);
 
-            if (!(s[err] & comparator))
+            if (!(s[!b][err] & comparator))
                 ++no_occ;
 
-            sprev = s;
+            b = !b;
         }
     }
     return no_occ;
@@ -64,25 +68,26 @@ bool wu_manber::exists(string &text) {
 
         uint64_t comparator = 1ul << (pattern.size() - 1);
 
-        vector<uint64_t> sprev(err + 1);
+        bool b = true;
+        vector<vector<uint64_t>> s(2, vector<uint64_t>(err + 1));
+
         size_t index = 0;
-        sprev[++index] = -1; // 111..111
+        s[b][index++] = -1; // 111..111
 
         for (size_t e = 0; e < err; ++e)
-            sprev[++index] = sprev[e] << 1;
+            s[b][index++] = s[b][e] << 1;
 
         for (auto &c : text) {
-            vector<uint64_t> s(err + 1);
             index = 0;
-            s[++index] = ((sprev[0] << 1) | char_mask[static_cast<unsigned char>(c)]);
+            s[!b][index++] = ((s[b][0] << 1) | char_mask[static_cast<unsigned char>(c)]);
 
             for (size_t i = 1; i <= err; ++i)
-                s[++index] = (((sprev[i] << 1) | char_mask[c]) & (sprev[i-1] << 1) & (s[i-1] << 1) & sprev[i-1]);
+                s[!b][index++] = (((s[b][i] << 1) | char_mask[c]) & (s[b][i - 1] << 1) & (s[!b][i - 1] << 1) & s[b][i - 1]);
 
-            if (!(s[err] & comparator))
+            if (!(s[!b][err] & comparator))
                 return true;
 
-            sprev = s;
+            b = !b;
         }
     }
     return false;

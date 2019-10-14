@@ -13,6 +13,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9fb32aa4-16c3-4662-ab5b-053418a7eda8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/wu_manber.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/wu_manber.cpp" afterDir="false" />
     </list>
@@ -61,7 +62,7 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="pmt" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-a a Romeo shakespeare.txt -c" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="pmt" TARGET_NAME="pmt" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="pmt" RUN_TARGET_NAME="pmt">
+    <configuration name="pmt" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-a s Romeo shakespeare.txt -c" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="pmt" TARGET_NAME="pmt" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="pmt" RUN_TARGET_NAME="pmt">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -82,7 +83,10 @@
       <workItem from="1570976197371" duration="1355000" />
       <workItem from="1570980514144" duration="17561000" />
       <workItem from="1571004714968" duration="1479000" />
-      <workItem from="1571006719383" duration="281000" />
+      <workItem from="1571006719383" duration="1253000" />
+      <workItem from="1571008081544" duration="4972000" />
+      <workItem from="1571013854427" duration="2643000" />
+      <workItem from="1571017622955" duration="1154000" />
     </task>
     <servers />
   </component>
@@ -111,6 +115,7 @@
         <watch expression="_goto" language="ObjectiveC" />
         <watch expression="fail.size()" language="ObjectiveC" />
         <watch expression="occ" language="ObjectiveC" />
+        <watch expression="err" language="ObjectiveC" />
       </configuration>
     </watches-manager>
   </component>
