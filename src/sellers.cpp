@@ -1,5 +1,6 @@
 #include "sellers.h"
 #include <string.h>
+#include<vector>
 #include <algorithm>
 
 sellers::sellers(list<string> &patterns, size_t err) : patterns(patterns), err(err) {}
