@@ -36,7 +36,7 @@ void help(char *s) {
             << "Search for PATTERN in each FILE" << endl
             << endl
             << "Options:" << endl
-            << "  -a, --algorithm NAME  set matching algorithm ('aho-corasick'|'shift-or''|'wu-manber') (default 'aho-corasick')"
+            << "  -a, --algorithm NAME  set matching algorithm ('a'/'aho-corasick' 'o'/'or-shift' 'w'/'wu-manber' 's'/`sellers`) (default 'aho-corasick')"
             << endl
             << "  -e, --edit UINT       set max edit distance (default 0)" << endl
             << "  -p, --pattern FILE    obtain patterns from FILE" << endl
@@ -55,13 +55,13 @@ int main(int argc, char *argv[]) {
 
     const char *short_options = "a:e:p:clh";
     const option long_options[] = {
-            {"algorithm", required_argument, nullptr, 'a'},
-            {"edit",      required_argument, nullptr, 'e'},
-            {"pattern",   required_argument, nullptr, 'p'},
-            {"count",     no_argument,       nullptr, 'c'},
-            {"line_count",no_argument,       nullptr, 'l'},
-            {"help",      no_argument,       nullptr, 'h'},
-            {nullptr,     no_argument,       nullptr, '\0'},
+            {"algorithm",  required_argument, nullptr, 'a'},
+            {"edit",       required_argument, nullptr, 'e'},
+            {"pattern",    required_argument, nullptr, 'p'},
+            {"count",      no_argument,       nullptr, 'c'},
+            {"line_count", no_argument,       nullptr, 'l'},
+            {"help",       no_argument,       nullptr, 'h'},
+            {nullptr,      no_argument,       nullptr, '\0'},
     };
     int option_index = -1;
 

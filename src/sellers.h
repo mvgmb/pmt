@@ -14,7 +14,7 @@ private:
 public:
     explicit sellers(list<string> &patterns, size_t err);
 
-    size_t count(string &txt);
+    size_t count(string &text);
 
     bool exists(string &txt);
 };
